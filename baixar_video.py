@@ -1,5 +1,6 @@
 import yt_dlp
 from spotdl import Spotdl
+from spotdl.types.options import DownloaderOptions
 
 def download_video_youtube(url, qualidade, formato):
     ydl_opts = {
@@ -40,11 +41,15 @@ def download_audio_youtube(url, qualidade, formato):
         ydl.download([url])
         print("--------------Download finalizado com sucesso--------------")
 
-def download_spotify(url):
-    # https://developer.spotify.com/
+def download_spotify(url, formato):
+    downloader_options = DownloaderOptions(
+        output="{artists} - {title}.{output-ext}",
+        format=formato,
+    )
     spotdl = Spotdl(
-        client_id="CLIENT_ID_SPOTIFY",
-        client_secret="CLIENT_SECRET_SPOTIFY"
+        client_id="CLIENT_ID",
+        client_secret="CLIENT_SECRET",
+        downloader_settings=downloader_options
     )
     musicas = spotdl.search([url])
 
@@ -58,6 +63,7 @@ if __name__ == "__main__":
     print("2 - Baixar audios do YouTube")
     print("3 - Baixar musicas do Spotify")
     escolha = input("Digite o número da opção desejada: ")
+    
     if escolha == '1':
         url = input("Coloque o link do video ou playlist:")
         
@@ -82,7 +88,7 @@ if __name__ == "__main__":
             '7': '240',
             '8': '144'
         }
-        qualidade = qualidade_opcoes.get(qualidade_escolhida)  # padrão 720p se inválido
+        qualidade = qualidade_opcoes.get(qualidade_escolhida)
         
         print("--------------Escolha o formato do video--------------")
         print("1 - mp4")
@@ -94,7 +100,7 @@ if __name__ == "__main__":
             '2': 'mkv',
             '3': 'webm'
         }
-        formato = formato_opcoes.get(formato_escolhido)  # padrão mp4 se inválido
+        formato = formato_opcoes.get(formato_escolhido)
         
         download_video_youtube(url, qualidade, formato)
         print("Download concluido")
@@ -140,7 +146,26 @@ if __name__ == "__main__":
         print("Download concluido")
     elif escolha == '3':
         url = input("Coloque o link da musica ou playlist:")
-        download_spotify(url)
+        
+        print("--------------Escolha o formato do audio--------------")
+        print("1 - mp3")
+        print("2 - m4a")
+        print("3 - wav")
+        print("4 - flac")
+        print("5 - aac")
+        print("6 - opus")
+        formato_escolhido = input("Digite o número do formato desejado: ")
+        formato_opcoes = {
+            '1': 'mp3',
+            '2': 'm4a',
+            '3': 'wav',
+            '4': 'flac',
+            '5': 'aac',
+            '6': 'opus'
+        }
+        formato = formato_opcoes.get(formato_escolhido)
+        
+        download_spotify(url, formato)
         print("Download concluido")
     else:
         print("Opção inválida.")
