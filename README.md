@@ -1,189 +1,223 @@
-🎬 Downloader de Vídeos e Músicas (YouTube & Spotify)
+# 🎬 Downloader de Vídeos e Músicas (YouTube & Spotify)
 
-Um script em Python para baixar vídeos, áudios e playlists do YouTube e músicas/playlists do Spotify, com escolha de qualidade e formato via terminal.
+Um **script em Python** para baixar **vídeos, áudios e playlists do YouTube** e **músicas/playlists do Spotify**, com escolha de **qualidade** e **formato** diretamente pelo **terminal**.
 
-O projeto usa:
+> Projeto focado em simplicidade, controle total pelo usuário e uso educacional.
 
-yt-dlp
- para downloads do YouTube
+---
 
-spotDL
- para downloads do Spotify
+## ✨ Funcionalidades
 
-ffmpeg para conversão e junção de áudio/vídeo
+### ✅ YouTube
 
-✨ Funcionalidades
-✅ YouTube
+* 📹 Baixar **vídeos** ou **playlists**
+* 🎚️ Escolher resolução (**2160p até 144p**)
+* 📦 Escolher formato de vídeo (**mp4, mkv, webm**)
+* 🎧 Baixar **apenas áudio**
+* 🔊 Escolher qualidade do áudio (**96kbps até 320kbps**)
+* 🎼 Escolher formato de áudio (**mp3, m4a, wav, flac, opus, etc.**)
 
-Baixar vídeos ou playlists
+### ✅ Spotify
 
-Escolher resolução (2160p até 144p)
+* 🎵 Baixar **músicas** ou **playlists**
+* 🎚️ Escolher formato do áudio
+* 📝 Nome automático dos arquivos:
 
-Escolher formato de vídeo (mp4, mkv, webm)
+  ```
+  Artista - Música.ext
+  ```
 
-Baixar apenas áudio
+---
 
-Escolher qualidade do áudio (96kbps até 320kbps)
+## 🧠 Tecnologias Utilizadas
 
-Escolher formato de áudio (mp3, m4a, wav, flac, etc.)
+* **yt-dlp** → downloads do YouTube
+* **spotDL** → downloads de músicas do Spotify (via YouTube)
+* **FFmpeg** → conversão e junção de áudio/vídeo
 
-✅ Spotify
+---
 
-Baixar músicas ou playlists
+## 📁 Estrutura do Projeto
 
-Escolher formato de áudio
+```text
+projeto/
+└── baixar_video.py
+```
 
-Nome automático: Artista - Música.ext
+---
 
-📁 Estrutura do Projeto
-📦 projeto
- └── baixar_video.py
+## 🧰 Requisitos
 
-🧰 Requisitos
+### 🔹 Python
 
-Antes de rodar o projeto, você precisa ter instalado:
+* **Versão:** 3.9 ou superior
 
-🔹 Python
+Verifique com:
 
-Python 3.9 ou superior
-
-Verifique:
-
+```bash
 python --version
+```
 
-🔹 FFmpeg
+---
 
-O ffmpeg é obrigatório para juntar e converter áudio/vídeo.
+### 🔹 FFmpeg (OBRIGATÓRIO)
 
-Windows
+O FFmpeg é usado para **converter** e **juntar** áudio/vídeo.
 
-Baixe ffmpeg-git-essentials.7z em: https://www.gyan.dev/ffmpeg/builds/
+#### 🪟 Windows
 
-Adicione o ffmpeg ao PATH do sistema
+1. Baixe o arquivo `ffmpeg-git-essentials.7z` em:
 
-Teste:
+   * [https://www.gyan.dev/ffmpeg/builds/](https://www.gyan.dev/ffmpeg/builds/)
+2. Extraia e **adicione o ffmpeg ao PATH** do sistema
+3. Teste no terminal:
 
+```bash
 ffmpeg -version
+```
 
-Linux (Debian/Ubuntu)
+#### 🐧 Linux (Debian / Ubuntu)
+
+```bash
 sudo apt install ffmpeg
+```
 
-📦 Instalação das Dependências
+---
+
+## 📦 Instalação das Dependências
 
 Instale as bibliotecas Python necessárias:
 
+```bash
 pip install yt-dlp spotdl
+```
 
-🔐 Configuração do Spotify (IMPORTANTE)
+---
 
-Para baixar músicas do Spotify, você precisa de credenciais da API do Spotify.
+## 🔐 Configuração do Spotify (IMPORTANTE)
 
-1️⃣ Crie um app no Spotify Developer
+Para baixar músicas do Spotify, é necessário configurar a **API oficial do Spotify**.
 
-Acesse:
+### 1️⃣ Criar um App no Spotify Developer
 
-https://developer.spotify.com/
+1. Acesse:
 
+   * [https://developer.spotify.com/](https://developer.spotify.com/)
+2. Crie um novo app
+3. Copie as credenciais:
 
-Crie um app e copie:
+   * `CLIENT_ID`
+   * `CLIENT_SECRET`
 
-CLIENT_ID
+---
 
-CLIENT_SECRET
+### 2️⃣ Configurar no Código
 
-2️⃣ Configure no código
+No arquivo `baixar_video.py`, edite:
 
-No arquivo baixar_video.py, altere:
-
+```python
 spotdl = Spotdl(
     client_id="CLIENT_ID",
     client_secret="CLIENT_SECRET",
     downloader_settings=downloader_options
 )
+```
 
+➡️ Substitua pelos seus dados reais.
 
-Substitua pelos seus dados reais.
+---
 
-▶️ Como Usar
+## ▶️ Como Usar
 
 Execute o script no terminal:
 
+```bash
 python baixar_video.py
-
+```
 
 Você verá o menu:
 
---------------Downloader de videos, musicas e playlists--------------
+```text
+-------------- Downloader de vídeos, músicas e playlists --------------
 Escolha uma opção:
-1 - Baixar videos do YouTube
-2 - Baixar audios do YouTube
-3 - Baixar musicas do Spotify
+1 - Baixar vídeos do YouTube
+2 - Baixar áudios do YouTube
+3 - Baixar músicas do Spotify
+```
 
-🎥 Opção 1 — Baixar Vídeos do YouTube
+---
 
-Cole o link do vídeo ou playlist
+## 🎥 Opção 1 — Baixar Vídeos do YouTube
 
-Escolha a qualidade (ex: 1080p)
+1. Cole o link do **vídeo** ou **playlist**
+2. Escolha a **qualidade** (ex: `1080p`)
+3. Escolha o **formato** (`mp4`, `mkv` ou `webm`)
 
-Escolha o formato (mp4, mkv ou webm)
+📌 Se a qualidade escolhida não existir, o script baixa automaticamente a **melhor disponível**.
 
-O download começa automaticamente
+---
 
-📌 Se a qualidade não existir, o script baixa a melhor disponível.
+## 🎧 Opção 2 — Baixar Áudio do YouTube
 
-🎧 Opção 2 — Baixar Áudio do YouTube
+1. Cole o link do vídeo ou playlist
+2. Escolha a **qualidade do áudio**
+3. Escolha o **formato** (`mp3`, `flac`, `opus`, etc.)
 
-Cole o link do vídeo ou playlist
+O áudio será **extraído e convertido automaticamente**.
 
-Escolha a qualidade do áudio
+---
 
-Escolha o formato (mp3, flac, opus, etc.)
+## 🎵 Opção 3 — Baixar Músicas do Spotify
 
-O áudio será extraído e convertido
+1. Cole o link da **música** ou **playlist** do Spotify
+2. Escolha o **formato do áudio**
 
-🎵 Opção 3 — Baixar Músicas do Spotify
+📌 As músicas são buscadas no YouTube e baixadas automaticamente.
 
-Cole o link da música ou playlist
+---
 
-Escolha o formato do áudio
+## 📂 Organização dos Arquivos
 
-As músicas serão buscadas no YouTube e baixadas automaticamente
+### YouTube
 
-📂 Organização dos Arquivos
-
-YouTube:
-
+```text
 01 - Nome do Vídeo.mp4
 02 - Outro Vídeo.mkv
+```
 
+### Spotify
 
-Spotify:
-
+```text
 Artista - Música.mp3
+```
 
-⚠️ Observações Importantes
+---
 
-O script não burla DRM
+## ⚠️ Observações Importantes
 
-Downloads dependem da disponibilidade pública do conteúdo
+* ❌ O script **não burla DRM**
+* 📡 Downloads dependem da **disponibilidade pública** do conteúdo
+* 🎓 Use apenas para **uso pessoal e educacional**
+* ⏳ Playlists grandes podem demorar mais tempo
 
-Use apenas para uso pessoal e educacional
+---
 
-Playlists grandes podem demorar
+## 🚀 Possíveis Melhorias Futuras
 
-🚀 Possíveis Melhorias Futuras
+* Interface gráfica (**GUI**)
+* Downloads em **paralelo**
+* Escolha de **pasta de saída**
+* Detecção automática do **FFmpeg**
+* Uso de arquivo `.env` para credenciais do Spotify
 
-Interface gráfica (GUI)
+---
 
-Download paralelo
+## 📜 Licença
 
-Escolha de pasta de saída
+Este projeto é de **uso livre** para fins **educacionais e pessoais**.
 
-Detecção automática de ffmpeg
+O uso indevido do conteúdo baixado é de **total responsabilidade do usuário**.
 
-Arquivo .env para credenciais Spotify
+---
 
-📜 Licença
-
-Este projeto é de uso livre para fins educacionais e pessoais.
-O uso indevido do conteúdo baixado é de responsabilidade do usuário.
+⭐ Se este projeto te ajudou, considere deixar uma estrela no repositório!
